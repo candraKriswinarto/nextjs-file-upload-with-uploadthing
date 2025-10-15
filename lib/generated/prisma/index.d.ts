@@ -884,6 +884,7 @@ export namespace Prisma {
     id: string | null
     name: string | null
     url: string | null
+    fileKey: string | null
     fileType: string | null
     fileSize: number | null
     createdAt: Date | null
@@ -893,6 +894,7 @@ export namespace Prisma {
     id: string | null
     name: string | null
     url: string | null
+    fileKey: string | null
     fileType: string | null
     fileSize: number | null
     createdAt: Date | null
@@ -902,6 +904,7 @@ export namespace Prisma {
     id: number
     name: number
     url: number
+    fileKey: number
     fileType: number
     fileSize: number
     createdAt: number
@@ -921,6 +924,7 @@ export namespace Prisma {
     id?: true
     name?: true
     url?: true
+    fileKey?: true
     fileType?: true
     fileSize?: true
     createdAt?: true
@@ -930,6 +934,7 @@ export namespace Prisma {
     id?: true
     name?: true
     url?: true
+    fileKey?: true
     fileType?: true
     fileSize?: true
     createdAt?: true
@@ -939,6 +944,7 @@ export namespace Prisma {
     id?: true
     name?: true
     url?: true
+    fileKey?: true
     fileType?: true
     fileSize?: true
     createdAt?: true
@@ -1035,6 +1041,7 @@ export namespace Prisma {
     id: string
     name: string
     url: string
+    fileKey: string
     fileType: string
     fileSize: number
     createdAt: Date
@@ -1063,6 +1070,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     url?: boolean
+    fileKey?: boolean
     fileType?: boolean
     fileSize?: boolean
     createdAt?: boolean
@@ -1072,6 +1080,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     url?: boolean
+    fileKey?: boolean
     fileType?: boolean
     fileSize?: boolean
     createdAt?: boolean
@@ -1081,6 +1090,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     url?: boolean
+    fileKey?: boolean
     fileType?: boolean
     fileSize?: boolean
     createdAt?: boolean
@@ -1090,12 +1100,13 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     url?: boolean
+    fileKey?: boolean
     fileType?: boolean
     fileSize?: boolean
     createdAt?: boolean
   }
 
-  export type UploadOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "url" | "fileType" | "fileSize" | "createdAt", ExtArgs["result"]["upload"]>
+  export type UploadOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "url" | "fileKey" | "fileType" | "fileSize" | "createdAt", ExtArgs["result"]["upload"]>
 
   export type $UploadPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Upload"
@@ -1104,6 +1115,7 @@ export namespace Prisma {
       id: string
       name: string
       url: string
+      fileKey: string
       fileType: string
       fileSize: number
       createdAt: Date
@@ -1533,6 +1545,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Upload", 'String'>
     readonly name: FieldRef<"Upload", 'String'>
     readonly url: FieldRef<"Upload", 'String'>
+    readonly fileKey: FieldRef<"Upload", 'String'>
     readonly fileType: FieldRef<"Upload", 'String'>
     readonly fileSize: FieldRef<"Upload", 'Int'>
     readonly createdAt: FieldRef<"Upload", 'DateTime'>
@@ -1920,6 +1933,7 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     url: 'url',
+    fileKey: 'fileKey',
     fileType: 'fileType',
     fileSize: 'fileSize',
     createdAt: 'createdAt'
@@ -2015,6 +2029,7 @@ export namespace Prisma {
     id?: StringFilter<"Upload"> | string
     name?: StringFilter<"Upload"> | string
     url?: StringFilter<"Upload"> | string
+    fileKey?: StringFilter<"Upload"> | string
     fileType?: StringFilter<"Upload"> | string
     fileSize?: IntFilter<"Upload"> | number
     createdAt?: DateTimeFilter<"Upload"> | Date | string
@@ -2024,6 +2039,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     url?: SortOrder
+    fileKey?: SortOrder
     fileType?: SortOrder
     fileSize?: SortOrder
     createdAt?: SortOrder
@@ -2036,6 +2052,7 @@ export namespace Prisma {
     NOT?: UploadWhereInput | UploadWhereInput[]
     name?: StringFilter<"Upload"> | string
     url?: StringFilter<"Upload"> | string
+    fileKey?: StringFilter<"Upload"> | string
     fileType?: StringFilter<"Upload"> | string
     fileSize?: IntFilter<"Upload"> | number
     createdAt?: DateTimeFilter<"Upload"> | Date | string
@@ -2045,6 +2062,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     url?: SortOrder
+    fileKey?: SortOrder
     fileType?: SortOrder
     fileSize?: SortOrder
     createdAt?: SortOrder
@@ -2062,6 +2080,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Upload"> | string
     name?: StringWithAggregatesFilter<"Upload"> | string
     url?: StringWithAggregatesFilter<"Upload"> | string
+    fileKey?: StringWithAggregatesFilter<"Upload"> | string
     fileType?: StringWithAggregatesFilter<"Upload"> | string
     fileSize?: IntWithAggregatesFilter<"Upload"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Upload"> | Date | string
@@ -2071,6 +2090,7 @@ export namespace Prisma {
     id?: string
     name: string
     url: string
+    fileKey: string
     fileType: string
     fileSize: number
     createdAt?: Date | string
@@ -2080,6 +2100,7 @@ export namespace Prisma {
     id?: string
     name: string
     url: string
+    fileKey: string
     fileType: string
     fileSize: number
     createdAt?: Date | string
@@ -2089,6 +2110,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    fileKey?: StringFieldUpdateOperationsInput | string
     fileType?: StringFieldUpdateOperationsInput | string
     fileSize?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -2098,6 +2120,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    fileKey?: StringFieldUpdateOperationsInput | string
     fileType?: StringFieldUpdateOperationsInput | string
     fileSize?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -2107,6 +2130,7 @@ export namespace Prisma {
     id?: string
     name: string
     url: string
+    fileKey: string
     fileType: string
     fileSize: number
     createdAt?: Date | string
@@ -2116,6 +2140,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    fileKey?: StringFieldUpdateOperationsInput | string
     fileType?: StringFieldUpdateOperationsInput | string
     fileSize?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -2125,6 +2150,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
+    fileKey?: StringFieldUpdateOperationsInput | string
     fileType?: StringFieldUpdateOperationsInput | string
     fileSize?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -2171,6 +2197,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     url?: SortOrder
+    fileKey?: SortOrder
     fileType?: SortOrder
     fileSize?: SortOrder
     createdAt?: SortOrder
@@ -2184,6 +2211,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     url?: SortOrder
+    fileKey?: SortOrder
     fileType?: SortOrder
     fileSize?: SortOrder
     createdAt?: SortOrder
@@ -2193,6 +2221,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     url?: SortOrder
+    fileKey?: SortOrder
     fileType?: SortOrder
     fileSize?: SortOrder
     createdAt?: SortOrder

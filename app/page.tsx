@@ -43,6 +43,12 @@ export default function Home() {
     setUploads(await res.json());
   };
 
+  const handleDelete = async (id: string) => {
+    if (!confirm("Delete this file?")) return;
+    const res = await fetch(`/api/uploads/${id}`, { method: "DELETE" });
+    if (res.ok) fetchUploads();
+  };
+
   useEffect(() => {
     fetchUploads();
   }, []);
@@ -128,6 +134,12 @@ export default function Home() {
                   />
                 )}
                 <p className="text-xs mt-2 truncate">{u.name}</p>
+                <button
+                  onClick={() => handleDelete(u.id)}
+                  className="text-red-600 hover:text-red-800 text-xs font-medium"
+                >
+                  Delete
+                </button>
               </div>
             ))}
           </div>

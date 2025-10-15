@@ -18,6 +18,7 @@ model Upload {
   id        String   @id @default(cuid())
   name      String
   url       String
+  fileKey   String
   fileType  String
   fileSize  Int
   createdAt DateTime @default(now())
