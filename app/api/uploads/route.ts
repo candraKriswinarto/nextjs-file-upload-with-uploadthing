@@ -5,6 +5,7 @@ export async function GET() {
   try {
     const uploads = await prisma.upload.findMany({
       orderBy: { createdAt: "desc" },
+      include: { user: { select: { name: true, image: true } } },
     });
     return NextResponse.json(uploads);
   } catch {

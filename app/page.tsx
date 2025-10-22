@@ -1,5 +1,6 @@
 "use client";
 
+import { signIn, signOut, useSession } from "@/lib/auth-client";
 import { useUploadThing } from "@/lib/uploadthing";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -10,9 +11,12 @@ type Upload = {
   name: string;
   url: string;
   fileType: string;
+  userId: string;
+  user: { name: string | null; image: string | null };
 };
 
 export default function Home() {
+  const { data: session } = useSession();
   const [preview, setPreview] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
   const [progress, setProgress] = useState(0);
@@ -36,6 +40,7 @@ export default function Home() {
       setPreview(URL.createObjectURL(f));
       setFile(f);
     },
+    disabled: !session,
   });
 
   const fetchUploads = async () => {
@@ -58,18 +63,56 @@ export default function Home() {
       <div className="max-w-2xl mx-auto space-y-6">
         <h1 className="text-3xl font-bold">File Upload</h1>
 
+        {session ? (
+          <div className="flex items-center gap-3">
+            <Image
+              src={session.user.image || ""}
+              alt=""
+              className="w-8 h-8 rounded-full"
+              width={32}
+              height={32}
+            />
+            <span className="text-sm">{session.user.name}</span>
+            <button
+              onClick={() => signOut()}
+              className="text-sm text-red-600 hover:underline"
+            >
+              Logout
+            </button>
+          </div>
+        ) : (
+          <button
+            onClick={() =>
+              signIn.social({ provider: "github", callbackURL: "/" })
+            }
+            className="bg-gray-900 text-white px-4 py-2 rounded-lg text-sm hover:bg-gray-800"
+          >
+            Login with GitHub
+          </button>
+        )}
+
+        {!session && (
+          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-sm text-yellow-800">
+            Please login to upload files
+          </div>
+        )}
+
         <div
           {...getRootProps()}
-          className={`border-2 border-dashed rounded-lg p-12 text-center cursor-pointer transition ${
-            isDragActive
-              ? "border-blue-500 bg-blue-50"
-              : "border-gray-300 bg-white"
+          className={`border-2 border-dashed rounded-lg p-12 text-center transition ${
+            !session
+              ? "border-gray-200 bg-gray-50 cursor-not-allowed"
+              : isDragActive
+              ? "border-blue-500 bg-blue-50 cursor-pointer"
+              : "border-gray-300 bg-white cursor-pointer"
           }`}
         >
           <input {...getInputProps()} />
           {!preview ? (
             <p className="text-gray-600">
-              Drag and drop or click to select file
+              {session
+                ? "Drag and drop or click to select file"
+                : "Login to upload files"}
             </p>
           ) : (
             <div className="space-y-4">
@@ -93,7 +136,7 @@ export default function Home() {
           )}
         </div>
 
-        {file && !isUploading && (
+        {file && !isUploading && session && (
           <button
             onClick={() => startUpload([file])}
             className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700"
@@ -133,13 +176,21 @@ export default function Home() {
                     className="w-full h-32 object-cover rounded"
                   />
                 )}
-                <p className="text-xs mt-2 truncate">{u.name}</p>
-                <button
-                  onClick={() => handleDelete(u.id)}
-                  className="text-red-600 hover:text-red-800 text-xs font-medium"
-                >
-                  Delete
-                </button>
+
+                <div className="mt-2 flex items-start justify-between gap-2">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs truncate">{u.name}</p>
+                    <p className="text-xs text-gray-500">by {u.user.name}</p>
+                  </div>
+                  {session?.user.id === u.userId && (
+                    <button
+                      onClick={() => handleDelete(u.id)}
+                      className="text-red-600 hover:text-red-800 text-xs font-medium"
+                    >
+                      Delete
+                    </button>
+                  )}
+                </div>
               </div>
             ))}
           </div>
